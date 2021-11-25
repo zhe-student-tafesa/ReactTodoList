@@ -1,0 +1,73 @@
+.hide{
+   opacity: 0;
+   transition: all 1s ease-in; 
+}
+
+/*.show{
+   opacity: 1;
+   transition: all 1s ease-in; 
+}*/
+
+.show{
+   
+   animation: show-item 2s ease-in forwards; 
+}
+
+@keyframes show-item{
+    0% {
+        opacity: 0;
+        color: red;
+    }
+        50% {
+        opacity: 0.5;
+        color: green;
+    }
+        100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+.fade-enter, .fade-appear {
+  opacity: 0;
+  color: red;
+  } 
+
+  /*第二个瞬间*/
+.fade-enter-active, .fade-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in; 
+
+
+}
+
+/*入场完成后*/
+.fade-enter-done{
+  opacity: 1;
+  /*color: green;*/
+
+}
+
+
+/*刚开始出场*/
+.fade-exit{
+    opacity: 1;
+    color: red;
+
+  } 
+
+
+  /*出场中*/
+.fade-exit-active{
+    opacity: 0;
+    transition: opacity 1s ease-in;
+
+  } 
+
+
+  /*出场完成后*/
+.fade-exit-done{
+    opacity: 0;
+    color: red;
+
+}

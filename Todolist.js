@@ -2,6 +2,11 @@
 
 import React from 'react';
 import TodoItem from './TodoItem';
+import TryCSS from './TryCSS';//
+import MyCssTransition from './MyCssTransition';//
+import MyCssTransitionGroup from './MyCssTransitionGroup';//MyCssTransitionGroup
+
+import axios from 'axios';
 //Fragment
 import {Fragment} from 'react';
 import './App.css';
@@ -21,6 +26,8 @@ class Todolist extends React.Component{//定义 Todolist类 继承 了 Component
   render(){
 // 必须使用大括号，使用.bind(this)改变 this指向    value={this.state.inputValue}//22222222React根据数据改变Dom
 //onChange  C必须大写，事件绑定
+    console.log('parent render');
+
     return (  
     <Fragment>
 
@@ -38,6 +45,9 @@ class Todolist extends React.Component{//定义 Todolist类 继承 了 Component
        
         
       </ul>
+      <TryCSS/>
+      <MyCssTransition/>
+      <MyCssTransitionGroup/>
 
     </Fragment>
 
@@ -93,6 +103,24 @@ class Todolist extends React.Component{//定义 Todolist类 继承 了 Component
         });
 
 
+    }
+    componentWillUpdate(){
+      console.log('componentWillUpdate');
+
+    }
+
+    //React 如何发送AJAX请求，如何让组件与 请求 建立关系！！！！！！！！！！！！！！！！！！
+    componentDidMount(){//调用get方法，请求的地址是  /api/todolist  发AJAX请求
+      //如果成功 打印 succ，如果失败 打印 error
+       axios.get('/api/todolist')
+       .then((res)=>{
+          //alert('succ')
+          console.log(res.data);
+          this.setState(()=>{
+            return {list:res.data};
+          });
+        })
+       .catch(()=>{alert('error')})
     }
   }
 

@@ -1,5 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
+import PropTypes from 'prop-types';
 import React from 'react';
 //Fragment
 import {Fragment} from 'react';
@@ -13,6 +14,7 @@ class TodoItem extends React.Component{ //定义 Todolist类 继承 了 Componen
 
     }
   render(){
+    console.log('child render');
     const { content }=this.props;//{content} 即this.props.content
  
   //父组件通过 属性向子组件传递数据  //父组件通过 属性向子组件传递数据 AAAAAAA
@@ -37,7 +39,32 @@ class TodoItem extends React.Component{ //定义 Todolist类 继承 了 Componen
     deleteItem(index);
 
   }
+  componentWillUnmount(){
+    console.log('child componentWillUnmount');
+
+  }
+  shouldComponentUpdate(nextProps,nextState){
+    if(nextProps.content===this.props.content){//输入没有变化，则不渲染
+      console.log(nextProps.content);
+      console.log(this.props.content);
+      return false;
+
+    }else{
+      return true;//
+
+    }
+
+  }
 }
 
+TodoItem.propTypes={
+  content:PropTypes.string,
+  deleteItem:PropTypes.func,
+  index:PropTypes.number,
+  test:PropTypes.string.isRequired
+}
+TodoItem.defaultProps={
+  test:'hello'
+}
 
   export default TodoItem;//导出  Todolist
